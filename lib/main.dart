@@ -27,27 +27,33 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.teal,
       body: SafeArea(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(width: 100, color: Colors.red,),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.yellow,
-                ),
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.green,
-                ),
-              ],
-            ),
-            Container(width: 100, color: Colors.blue,),
-          ],
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:  <Widget>[
+              const CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('images/100_years.jpg'),
+              ),
+              const Text(
+                'Name LastName',
+                style: TextStyle(
+                  fontFamily: 'Pacifico',
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.normal),
+              ),
+              Text(
+                'FLUTTER DEVELOPER',
+                style: TextStyle(
+                  fontFamily: 'Source Sans Pro',
+                    fontSize: 16,
+                    color: Colors.teal.shade100,
+                  letterSpacing: 2.5,
+                    ),
+              ),
+            ],
+          ),
         ),
       ),
     );
