@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
+import 'package:udemy_flutter_course/section/7/dice_page.dart';
 
 class HomePage {
   static const String routName = '/homePage';
@@ -32,7 +33,13 @@ class HomePage {
             },
           ),
           TextButton(
-            child: const Text('2'),onPressed: () {},
+            child: const Text('Dice',style: TextStyle(color: Colors.red),),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                DicePage.routName,
+              );
+            },
           ),
           TextButton(
             child: const Text('3'),onPressed: () {},
