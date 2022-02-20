@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
+import 'package:udemy_flutter_course/section/8/magic_ball.dart';
 
 class HomePage {
   static const String routName = '/homePage';
@@ -33,7 +34,10 @@ class HomePage {
             },
           ),
           TextButton(
-            child: const Text('Dice',style: TextStyle(color: Colors.red),),
+            child: const Text(
+              'Dice',
+              style: TextStyle(color: Colors.red),
+            ),
             onPressed: () {
               Navigator.pushNamed(
                 context,
@@ -42,7 +46,16 @@ class HomePage {
             },
           ),
           TextButton(
-            child: const Text('3'),onPressed: () {},
+            child:  Text(
+              'Magic Ball',
+              style: TextStyle(color: Colors.blue.shade800),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                MagicBallPage.routName,
+              );
+            },
           ),
           TextButton(
             child: const Text('4'),onPressed: () {},
