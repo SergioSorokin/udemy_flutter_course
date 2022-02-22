@@ -3,6 +3,7 @@ import 'package:udemy_flutter_course/home_page.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
+import 'package:udemy_flutter_course/section/9/xylophone.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
         UserCard.routName: (context) => const UserCard(),
         DicePage.routName: (context) => const DicePage(),
         MagicBallPage.routName: (context) => const MagicBallPage(),
+        Xylophone.routName: (context) => const Xylophone(),
       },
       initialRoute: HomePage.routName,
     );

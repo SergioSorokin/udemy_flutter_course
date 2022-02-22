@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
+import 'package:udemy_flutter_course/section/9/xylophone.dart';
 
 class HomePage {
   static const String routName = '/homePage';
@@ -58,7 +59,16 @@ class HomePage {
             },
           ),
           TextButton(
-            child: const Text('4'),onPressed: () {},
+            child: const Text(
+              'Xylophone',
+              style: TextStyle(color: Colors.deepPurple),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                Xylophone.routName,
+              );
+            },
           ),
           TextButton(
             child: const Text('5'),onPressed: () {},
