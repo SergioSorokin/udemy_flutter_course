@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/10/quiz_brain.dart';
 
 class QuizzlerPage extends StatelessWidget {
   static const String routName = '/quizzler';
@@ -22,6 +23,8 @@ class QuizzlerPage extends StatelessWidget {
   }
 }
 
+QuizBrain quizBrain = QuizBrain();
+
 class Quizzler extends StatefulWidget {
   const Quizzler({Key? key}) : super(key: key);
 
@@ -32,21 +35,23 @@ class Quizzler extends StatefulWidget {
 class _QuizzlerState extends State<Quizzler> {
   List<Widget> scoreKeeper = [];
 
+  var questionsNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        const Expanded(
+        Expanded(
           flex: 5,
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                quizBrain.questionBank[questionsNumber].questionText,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 25, color: Colors.white),
+                style: const TextStyle(fontSize: 25, color: Colors.white),
               ),
             ),
           ),
@@ -63,8 +68,16 @@ class _QuizzlerState extends State<Quizzler> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
+                bool correctAnswer =
+                    quizBrain.questionBank[questionsNumber].questionAnswer;
+                if (correctAnswer) {
+                  print('User got it right');
+                } else {
+                  print('User got it wrong');
+                }
                 setState(
                   () {
+                    questionsNumber++;
                     scoreKeeper.add(
                       const Icon(
                         Icons.check,
@@ -73,6 +86,7 @@ class _QuizzlerState extends State<Quizzler> {
                     );
                   },
                 );
+                print(questionsNumber);
               },
             ),
           ),
@@ -89,8 +103,16 @@ class _QuizzlerState extends State<Quizzler> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
+              bool correctAnswer =
+                  quizBrain.questionBank[questionsNumber].questionAnswer;
+              if (!correctAnswer) {
+                print('User got it right');
+              } else {
+                print('User got it wrong');
+              }
               setState(
-                    () {
+                () {
+                  questionsNumber++;
                   scoreKeeper.add(
                     const Icon(
                       Icons.close,
@@ -99,6 +121,7 @@ class _QuizzlerState extends State<Quizzler> {
                   );
                 },
               );
+              print(questionsNumber);
             },
           ),
         )),
