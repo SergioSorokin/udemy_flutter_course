@@ -35,7 +35,6 @@ class Quizzler extends StatefulWidget {
 class _QuizzlerState extends State<Quizzler> {
   List<Widget> scoreKeeper = [];
 
-  var questionsNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +48,7 @@ class _QuizzlerState extends State<Quizzler> {
             padding: const EdgeInsets.all(10),
             child: Center(
               child: Text(
-                quizBrain.questionBank[questionsNumber].questionText,
+                quizBrain.getQuestionText(),
                 textAlign: TextAlign.center,
                 style: const TextStyle(fontSize: 25, color: Colors.white),
               ),
@@ -68,8 +67,7 @@ class _QuizzlerState extends State<Quizzler> {
                 style: TextStyle(fontSize: 20, color: Colors.white),
               ),
               onPressed: () {
-                bool correctAnswer =
-                    quizBrain.questionBank[questionsNumber].questionAnswer;
+                bool correctAnswer = quizBrain.getCorrectAnswer();
                 if (correctAnswer) {
                   print('User got it right');
                 } else {
@@ -77,7 +75,7 @@ class _QuizzlerState extends State<Quizzler> {
                 }
                 setState(
                   () {
-                    questionsNumber++;
+                    quizBrain.nextQuestion();
                     scoreKeeper.add(
                       const Icon(
                         Icons.check,
@@ -86,7 +84,6 @@ class _QuizzlerState extends State<Quizzler> {
                     );
                   },
                 );
-                print(questionsNumber);
               },
             ),
           ),
@@ -103,8 +100,7 @@ class _QuizzlerState extends State<Quizzler> {
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             onPressed: () {
-              bool correctAnswer =
-                  quizBrain.questionBank[questionsNumber].questionAnswer;
+              bool correctAnswer = quizBrain.getCorrectAnswer();
               if (!correctAnswer) {
                 print('User got it right');
               } else {
@@ -112,7 +108,7 @@ class _QuizzlerState extends State<Quizzler> {
               }
               setState(
                 () {
-                  questionsNumber++;
+                  quizBrain.nextQuestion();
                   scoreKeeper.add(
                     const Icon(
                       Icons.close,
@@ -121,10 +117,9 @@ class _QuizzlerState extends State<Quizzler> {
                   );
                 },
               );
-              print(questionsNumber);
             },
           ),
-        )),
+        ),),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Row(
