@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/10/quizzler.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
@@ -71,7 +72,19 @@ class HomePage {
             },
           ),
           TextButton(
-            child: const Text('5'),onPressed: () {},
+            child: const Text(
+              'Quizzler',
+              style: TextStyle(color: Colors.green),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                QuizzlerPage.routName,
+              );
+            },
+          ),
+          TextButton(
+            child: const Text('?'),onPressed: () {},
           ),
         ],
       ),
