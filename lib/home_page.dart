@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/10/quizzler.dart';
 import 'package:udemy_flutter_course/section/11/destini.dart';
+import 'package:udemy_flutter_course/section/12/bmi_calculator.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
@@ -93,6 +94,18 @@ class HomePage {
               Navigator.pushNamed(
                 context,
                 Destini.routName,
+              );
+            },
+          ),
+          TextButton(
+            child: const Text(
+              'BMI Calculator',
+              style: TextStyle(color: Colors.pink),
+            ),
+            onPressed: () {
+              Navigator.pushNamed(
+                context,
+                BMICalculator.routName,
               );
             },
           ),
