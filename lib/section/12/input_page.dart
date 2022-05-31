@@ -77,9 +77,11 @@ class ReusableCard extends StatelessWidget {
   const ReusableCard({
     Key? key,
     required this.colour,
+    this.cardChild,
   }) : super(key: key);
 
   final Color colour;
+  final Widget? cardChild;
 
   @override
   Widget build(BuildContext context) {
