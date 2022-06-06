@@ -5,6 +5,7 @@ import 'package:udemy_flutter_course/section/12/reusable_card.dart';
 
 const bottomContainerHeight = 80.0;
 const activeCardColour = Color(0xFF1D1E33);
+const inactiveCardColour = Color(0xFF111328);
 const bottomContainerColour = Color(0xFFEB1555);
 
 class InputPage extends StatefulWidget {
@@ -15,6 +16,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Color maleCardColour = inactiveCardColour;
+  Color femaleCardColour = inactiveCardColour;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,20 +33,34 @@ class _InputPageState extends State<InputPage> {
         children: [
           Expanded(
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: ReusableCard(
-                    colour: activeCardColour,
-                    cardChild: IconContent(
+                    onTap: () {
+                      setState(
+                        () {
+                          updateColour(1);
+                        },
+                      );
+                    },
+                    colour: maleCardColour,
+                    cardChild: const IconContent(
                       icon: FontAwesomeIcons.mars,
                       title: 'MALE',
                     ),
                   ),
                 ),
-                 Expanded(
+                Expanded(
                   child: ReusableCard(
-                    colour: activeCardColour,
-                    cardChild: IconContent(
+                    onTap: () {
+                      setState(
+                            () {
+                          updateColour(2);
+                        },
+                      );
+                    },
+                    colour: femaleCardColour,
+                    cardChild: const IconContent(
                       icon: FontAwesomeIcons.venus,
                       title: 'FEMALE',
                     ),
@@ -82,8 +100,26 @@ class _InputPageState extends State<InputPage> {
       ),
     );
   }
+
+  // 1 = male , 2 = female
+  void updateColour(int gender) {
+    //male card pressed
+    if (gender == 1) {
+      if (maleCardColour == inactiveCardColour) {
+        maleCardColour = activeCardColour;
+        femaleCardColour = inactiveCardColour;
+      } else {
+        maleCardColour = inactiveCardColour;
+      }
+    }
+    //female card pressed
+    if(gender == 2){
+      if (femaleCardColour == inactiveCardColour) {
+        femaleCardColour = activeCardColour;
+        maleCardColour = inactiveCardColour;
+      } else {
+        femaleCardColour = inactiveCardColour;
+      }
+    }
+  }
 }
-
-
-
-
