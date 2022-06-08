@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
         textTheme: const TextTheme(
           bodyText2: TextStyle(color: Colors.white),
         ),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       debugShowCheckedModeBanner: false,
       routes: {
