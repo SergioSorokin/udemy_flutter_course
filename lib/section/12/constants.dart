@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 const kBottomContainerHeight = 80.0;
 const kActiveCardColour = Color(0xFF1D1E33);
@@ -14,4 +15,8 @@ const kLabelTextStile = TextStyle(
 const kNumberTextStile = TextStyle(
   fontSize: 50,
   fontWeight: FontWeight.w900,
+);
+const kLargeButtonTextStyle = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
 );
