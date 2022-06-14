@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/12/components/bottom_button.dart';
 import 'package:udemy_flutter_course/section/12/constants.dart';
 import 'package:udemy_flutter_course/section/12/components/reusable_card.dart';
 
@@ -9,16 +10,21 @@ class ResultPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Text('BMI CALCULATOR'),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const Expanded(
-            child: Text(
-              'Your Result',
-              style: kTitleTextStyle,
+           Expanded(
+            child: Container(
+              padding: const EdgeInsets.all(15),
+              alignment: Alignment.bottomLeft,
+              child:const Text(
+                'Your Result',
+                style: kTitleTextStyle,
+              ),
             ),
           ),
           Expanded(
@@ -45,6 +51,12 @@ class ResultPage extends StatelessWidget {
                 ],
               ),
             ),
+          ),
+          BottomButton(
+            buttonTitle: 'RE-CALCULATE',
+            onTap: () {
+              Navigator.pop(context);
+            },
           ),
         ],
       ),
