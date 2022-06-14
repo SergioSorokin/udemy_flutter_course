@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:udemy_flutter_course/section/12/components/bottom_button.dart';
 import 'package:udemy_flutter_course/section/12/constants.dart';
-import 'package:udemy_flutter_course/section/12/icon_content.dart';
-import 'package:udemy_flutter_course/section/12/result_page.dart';
-import 'package:udemy_flutter_course/section/12/reusable_card.dart';
+import 'package:udemy_flutter_course/section/12/components/icon_content.dart';
+import 'package:udemy_flutter_course/section/12/screens/result_page.dart';
+import 'package:udemy_flutter_course/section/12/components/reusable_card.dart';
+import 'package:udemy_flutter_course/section/12/components/round_icon_button.dart';
 
 enum Gender { male, female }
 
@@ -228,54 +230,6 @@ class _InputPageState extends State<InputPage> {
   }
 }
 
-class BottomButton extends StatelessWidget {
-  final  Function()? onTap;
-  final String buttonTitle;
 
-  const BottomButton({
-    Key? key, required this.onTap, required this.buttonTitle,
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Container(
-        child:  Center(
-          child: Text(
-            buttonTitle,
-            style: kLargeButtonTextStyle,
-          ),
-        ),
-        height: kBottomContainerHeight,
-        width: double.infinity,
-        color: kBottomContainerColour,
-        margin: const EdgeInsets.only(top: 10),
-      ),
-    );
-  }
-}
 
-class RoundIconButton extends StatelessWidget {
-  const RoundIconButton({
-    Key? key,
-    required this.icon,
-    required this.onPressed,
-  }) : super(key: key);
-  final IconData icon;
-  final Function()? onPressed;
-  @override
-  Widget build(BuildContext context) {
-    return RawMaterialButton(
-      elevation: 0.0,
-      child: Icon(icon),
-      onPressed: onPressed,
-      constraints: const BoxConstraints.tightFor(
-        width: 56,
-        height: 56,
-      ),
-      shape: const CircleBorder(),
-      fillColor: kRoundIconButtonColour,
-    );
-  }
-}

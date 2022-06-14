@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/12/constants.dart';
-import 'package:udemy_flutter_course/section/12/reusable_card.dart';
+import 'package:udemy_flutter_course/section/12/components/reusable_card.dart';
 
 class ResultPage extends StatelessWidget {
   const ResultPage({Key? key}) : super(key: key);

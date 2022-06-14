@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter_course/section/12/input_page.dart';
+import 'package:udemy_flutter_course/section/12/screens/input_page.dart';
 
 class BMICalculator extends StatelessWidget {
   static const String routName = '/BMICalculator';
