@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:udemy_flutter_course/section/13/services/location.dart';
+import 'package:udemy_flutter_course/section/13/services/networking.dart';
 
 const apiKey = '2636ad7f6dcd263345b33ab86d6f8aa4';
 
@@ -20,39 +21,19 @@ class _LoadingScreenState extends State<LoadingScreen> {
   @override
   void initState() {
     super.initState();
-    getLocation();
+    getLocationData();
   }
 
-  void getLocation() async {
+  void getLocationData() async {
     Location location = Location();
     await location.getCurrentLocation();
     latitude = location.latitude;
     longitude = location.longitude;
 
-    getData();
-    // print(latitude);
-    // print(longitude);
-  }
-
-  void getData() async {
-    var url = Uri.parse(
+    NetworkHelper networkHelper = NetworkHelper(
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
-    http.Response response = await http.get(url);
-    String data;
-    if (response.statusCode == 200) {
-      data = response.body;
-      var decodeData = jsonDecode(data);
 
-      double temperature = decodeData['main']['temp'];
-      int condition = decodeData['weather'][0]['id'];
-      String cityName = decodeData['name'];
-      print(temperature);
-      print(condition);
-      print(cityName);
-    } else {
-      data = response.statusCode.toString();
-    }
-    // print(data);
+    var weatherData = await networkHelper.getData();
   }
 
   @override
@@ -60,10 +41,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
     return Center(
       child: ElevatedButton(
         onPressed: () {
-          getLocation();
+          getLocationData();
         },
         child: Text(widget.buttonText),
       ),
     );
   }
 }
+//todo: move this data to location_screen.dart
+  // double temperature = decodeData['main']['temp'];
+  // int condition = decodeData['weather'][0]['id'];
+  // String cityName = decodeData['name'];
