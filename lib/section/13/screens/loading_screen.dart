@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:udemy_flutter_course/section/13/screens/location_screen.dart';
 import 'package:udemy_flutter_course/section/13/services/location.dart';
 import 'package:udemy_flutter_course/section/13/services/networking.dart';
@@ -44,12 +45,12 @@ class _LoadingScreenState extends State<LoadingScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: () {
-          getLocationData();
-        },
-        child: Text(widget.buttonText),
+    return const Scaffold(
+      body: Center(
+        child: SpinKitDoubleBounce(
+          color: Colors.white,
+          size: 100,
+        )
       ),
     );
   }
