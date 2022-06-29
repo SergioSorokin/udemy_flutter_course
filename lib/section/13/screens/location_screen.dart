@@ -34,6 +34,12 @@ class _LocationScreenState extends State<LocationScreen> {
                 children: [
                   ElevatedButton(
                     onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.transparent),
+                      shadowColor:
+                          MaterialStateProperty.all<Color>(Colors.transparent),
+                    ),
                     child: const Icon(
                       Icons.near_me,
                       size: 50,
@@ -41,6 +47,12 @@ class _LocationScreenState extends State<LocationScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {},
+                    style: ButtonStyle(
+                      backgroundColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                      shadowColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
+                    ),
                     child: const Icon(
                       Icons.location_city,
                       size: 50,
@@ -57,7 +69,7 @@ class _LocationScreenState extends State<LocationScreen> {
                       style: kTempTextStyle,
                     ),
                     Text(
-                      '=',
+                      '☀',
                       style: kConditionTextStyle,
                     )
                   ],
@@ -66,7 +78,7 @@ class _LocationScreenState extends State<LocationScreen> {
               const Padding(
                 padding: EdgeInsets.only(right: 15),
                 child: Text(
-                  'some message',
+                  "It's 🍦 time in San Francisco",
                   textAlign: TextAlign.right,
                   style: kMessageTextStyle,
                 ),
