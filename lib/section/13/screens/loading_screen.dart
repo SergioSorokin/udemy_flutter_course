@@ -1,7 +1,5 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:udemy_flutter_course/section/13/screens/location_screen.dart';
 import 'package:udemy_flutter_course/section/13/services/location.dart';
 import 'package:udemy_flutter_course/section/13/services/networking.dart';
 
@@ -34,6 +32,14 @@ class _LoadingScreenState extends State<LoadingScreen> {
         'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
 
     var weatherData = await networkHelper.getData();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+          return const LocationScreen();
+        },
+      ),
+    );
   }
 
   @override
@@ -48,7 +54,3 @@ class _LoadingScreenState extends State<LoadingScreen> {
     );
   }
 }
-//todo: move this data to location_screen.dart
-  // double temperature = decodeData['main']['temp'];
-  // int condition = decodeData['weather'][0]['id'];
-  // String cityName = decodeData['name'];
