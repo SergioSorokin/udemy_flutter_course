@@ -26,6 +26,12 @@ class _LocationScreenState extends State<LocationScreen> {
 
   updateUI(var weatherData) {
     setState(() {
+      if (weatherData == null) {
+        temperature = 0;
+        weatherIcon = 'Error';
+        cityName = '';
+        weatherMessage = 'Enable to get weather data';
+      }
       double temp = weatherData['main']['temp'];
       temperature = temp.toInt();
       var condition = weatherData['weather'][0]['id'];
@@ -59,12 +65,21 @@ class _LocationScreenState extends State<LocationScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      var weatherData = await weather.grtLocationWeather();
+                      updateUI(weatherData);
+                    },
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent),
-                      shadowColor:
-                          MaterialStateProperty.all<Color>(Colors.transparent),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
+                      shadowColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
+                      overlayColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
+                      splashFactory: NoSplash.splashFactory,
                     ),
                     child: const Icon(
                       Icons.near_me,
@@ -80,6 +95,10 @@ class _LocationScreenState extends State<LocationScreen> {
                       shadowColor: MaterialStateProperty.all<Color>(
                         Colors.transparent,
                       ),
+                      overlayColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
+                      splashFactory: NoSplash.splashFactory,
                     ),
                     child: const Icon(
                       Icons.location_city,
