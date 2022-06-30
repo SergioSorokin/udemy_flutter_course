@@ -25,12 +25,14 @@ class _LocationScreenState extends State<LocationScreen> {
   }
 
   updateUI(var weatherData) {
-    double temp = weatherData['main']['temp'];
-    temperature = temp.toInt();
-    var condition = weatherData['weather'][0]['id'];
-    cityName = weatherData['name'];
-    weatherIcon = weather.getWeatherIcon(condition);
-    weatherMessage = weather.getWeatherIcon(temperature);
+    setState(() {
+      double temp = weatherData['main']['temp'];
+      temperature = temp.toInt();
+      var condition = weatherData['weather'][0]['id'];
+      cityName = weatherData['name'];
+      weatherIcon = weather.getWeatherIcon(condition);
+      weatherMessage = weather.getWeatherIcon(temperature);
+    });
   }
 
   @override
@@ -101,7 +103,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   ],
                 ),
               ),
-               Padding(
+              Padding(
                 padding: const EdgeInsets.only(right: 15),
                 child: Text(
                   '$weatherMessage in $cityName',
