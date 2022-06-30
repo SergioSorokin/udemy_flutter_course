@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/13/screens/city_screen.dart';
 import 'package:udemy_flutter_course/section/13/services/weather.dart';
 import 'package:udemy_flutter_course/section/13/utilities/constans.dart';
 
@@ -87,7 +88,16 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const CityScreen();
+                          },
+                        ),
+                      );
+                    },
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all<Color>(
                         Colors.transparent,
