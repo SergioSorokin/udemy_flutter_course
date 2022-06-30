@@ -46,6 +46,18 @@ class _CityScreenState extends State<CityScreen> {
                   ),
                 ),
               ),
+              Container(
+                padding: const EdgeInsets.all(10.0),
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                  decoration: kTextFieldInputDecoration,
+                  onChanged: (value) {
+                    print(value);
+                  },
+                ),
+              ),
               ElevatedButton(
                 onPressed: () {
                 },
