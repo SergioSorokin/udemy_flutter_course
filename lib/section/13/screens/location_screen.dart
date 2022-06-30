@@ -1,14 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/13/utilities/constans.dart';
 
+const String dCelsius = '\u00B0';
+
 class LocationScreen extends StatefulWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+  const LocationScreen({Key? key, this.locationWeather}) : super(key: key);
+
+  final dynamic locationWeather;
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  double temperature = 0.0;
+  int condition = 0;
+  String cityName = '';
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.locationWeather);
+  }
+
+  updateUI(var weatherData) {
+    temperature = weatherData['main']['temp'];
+    condition = weatherData['weather'][0]['id'];
+    cityName = weatherData['name'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,10 +68,12 @@ class _LocationScreenState extends State<LocationScreen> {
                   ElevatedButton(
                     onPressed: () {},
                     style: ButtonStyle(
-                      backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
-                      shadowColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
+                      backgroundColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
+                      shadowColor: MaterialStateProperty.all<Color>(
+                        Colors.transparent,
+                      ),
                     ),
                     child: const Icon(
                       Icons.location_city,
@@ -63,12 +85,12 @@ class _LocationScreenState extends State<LocationScreen> {
               Padding(
                 padding: const EdgeInsets.only(left: 15),
                 child: Row(
-                  children: const [
+                  children: [
                     Text(
-                      '32\u00B0',
+                      '${temperature.toInt()}$dCelsius',
                       style: kTempTextStyle,
                     ),
-                    Text(
+                    const Text(
                       '☀',
                       style: kConditionTextStyle,
                     )
@@ -90,8 +112,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-
-//todo: use this data in this file
-// double temperature = decodeData['main']['temp'];
-// int condition = decodeData['weather'][0]['id'];
-// String cityName = decodeData['name'];
