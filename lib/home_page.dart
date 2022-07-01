@@ -25,105 +25,77 @@ class HomePage {
       ),
       body: GridView.count(
         crossAxisCount: 4,
-        children: [
-          TextButton(
-            child: const Text(
-            'User Card',
-            style: TextStyle(color: Colors.teal),
+        children: const[
+          CustomNavigationButton(
+            routName: UserCard.routName,
+            assetImage: 'images/id-card.jpg',
           ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                UserCard.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: DicePage.routName,
+            assetImage: 'images/dice.png',
           ),
-          TextButton(
-            child: const Text(
-              'Dice',
-              style: TextStyle(color: Colors.red),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                DicePage.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: MagicBallPage.routName,
+            assetImage: 'images/magic_ball.png',
           ),
-          TextButton(
-            child:  Text(
-              'Magic Ball',
-              style: TextStyle(color: Colors.blue.shade800),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                MagicBallPage.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: Xylophone.routName,
+            assetImage: 'images/xylophone.png',
           ),
-          TextButton(
-            child: const Text(
-              'Xylophone',
-              style: TextStyle(color: Colors.deepPurple),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                Xylophone.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: QuizzlerPage.routName,
+            assetImage: 'images/quizzler.png',
           ),
-          TextButton(
-            child: const Text(
-              'Quizzler',
-              style: TextStyle(color: Colors.green),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                QuizzlerPage.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: Destini.routName,
+            assetImage: 'images/destini.png',
           ),
-          TextButton(
-            child: const Text(
-              'Destini',
-              style: TextStyle(color: Colors.orange),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                Destini.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: BMICalculator.routName,
+            assetImage: 'images/b_m_i_calculator.png',
           ),
-          TextButton(
-            child: const Text(
-              'BMI Calculator',
-              textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.pink),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                BMICalculator.routName,
-              );
-            },
-          ),
-          TextButton(
-            child: const Text(
-              'Clima',
-              style: TextStyle(color: Colors.purpleAccent),
-            ),
-            onPressed: () {
-              Navigator.pushNamed(
-                context,
-                ClimaHomePage.routName,
-              );
-            },
+          CustomNavigationButton(
+            routName: ClimaHomePage.routName,
+            assetImage: 'images/clima.png',
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomNavigationButton extends StatelessWidget {
+  const CustomNavigationButton({
+    required this.routName,
+    required this.assetImage,
+    Key? key,
+  }) : super(key: key);
+  final String assetImage;
+  final String routName;
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      child: Image(
+        image: AssetImage(assetImage),
+      ),
+      onPressed: () {
+        Navigator.pushNamed(
+          context,
+          routName,
+        );
+      },
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all<Color>(
+          Colors.transparent,
+        ),
+        shadowColor: MaterialStateProperty.all<Color>(
+          Colors.transparent,
+        ),
+        overlayColor: MaterialStateProperty.all<Color>(
+          Colors.transparent,
+        ),
+        splashFactory: NoSplash.splashFactory,
       ),
     );
   }
