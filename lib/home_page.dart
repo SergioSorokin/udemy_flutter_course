@@ -4,6 +4,7 @@ import 'package:udemy_flutter_course/section/10/quizzler.dart';
 import 'package:udemy_flutter_course/section/11/destini.dart';
 import 'package:udemy_flutter_course/section/12/bmi_calculator.dart';
 import 'package:udemy_flutter_course/section/13/clima_home_page.dart';
+import 'package:udemy_flutter_course/section/14/bitcoin_ticker_home_page.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
@@ -58,6 +59,10 @@ class HomePage {
           CustomNavigationButton(
             routName: ClimaHomePage.routName,
             assetImage: 'images/clima.png',
+          ),
+          CustomNavigationButton(
+            routName: BitcoinTickerHomePage.routName,
+            assetImage: 'images/bitcoin.png',
           ),
         ],
       ),
