@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/14/coin_data.dart';
 
 class PriceScreen extends StatefulWidget {
   const PriceScreen({Key? key}) : super(key: key);
@@ -9,6 +10,19 @@ class PriceScreen extends StatefulWidget {
 
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
+
+  List<DropdownMenuItem> getDropdownItems() {
+    List<DropdownMenuItem<dynamic>> dropdownItems = [];
+    for(String currency in currenciesList) {
+      var newItem = DropdownMenuItem(
+        child: Text(currency),
+        value: currency,
+      );
+      dropdownItems.add(newItem);
+    }
+    return dropdownItems;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,31 +59,10 @@ class _PriceScreenState extends State<PriceScreen> {
             alignment: Alignment.center,
             padding: const EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: DropdownButton<String>(
+            child: DropdownButton<dynamic>(
               value: selectedCurrency,
-              items: const [
-                DropdownMenuItem(
-                  child: Text(
-                    'USD',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  value: 'USD',
-                ),
-                DropdownMenuItem(
-                  child: Text(
-                    'EUR',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  value: 'EUR',
-                ),
-                DropdownMenuItem(
-                  child: Text(
-                    'GBP',
-                    style: TextStyle(color: Colors.black),
-                  ),
-                  value: 'GBP',
-                ),
-              ],
+              dropdownColor: Colors.black,
+              items: getDropdownItems(),
               onChanged: (value) {
                 setState(
                   () {
