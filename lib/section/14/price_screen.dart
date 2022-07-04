@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:udemy_flutter_course/section/14/coin_data.dart';
+import 'dart:io' show Platform;
 
 class PriceScreen extends StatefulWidget {
   const PriceScreen({Key? key}) : super(key: key);
@@ -81,11 +82,12 @@ class _PriceScreenState extends State<PriceScreen> {
             ),
           ),
           Container(
-              height: 150.0,
-              alignment: Alignment.center,
-              padding: const EdgeInsets.only(bottom: 30.0),
-              color: Colors.lightBlue,
-              child: iOSPicker()),
+            height: 150.0,
+            alignment: Alignment.center,
+            padding: const EdgeInsets.only(bottom: 30.0),
+            color: Colors.lightBlue,
+            child: Platform.isAndroid ? androidDropdown() : iOSPicker(),
+          ),
         ],
       ),
     );
