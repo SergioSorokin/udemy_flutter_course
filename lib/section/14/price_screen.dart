@@ -8,6 +8,7 @@ class PriceScreen extends StatefulWidget {
 }
 
 class _PriceScreenState extends State<PriceScreen> {
+  String selectedCurrency = 'USD';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,14 +20,14 @@ class _PriceScreenState extends State<PriceScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Padding(
-            padding:const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
+            padding: const EdgeInsets.fromLTRB(18.0, 18.0, 18.0, 0),
             child: Card(
               color: Colors.lightBlueAccent,
               elevation: 5.0,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child:const Padding(
+              child: const Padding(
                 padding: EdgeInsets.symmetric(vertical: 15.0, horizontal: 28.0),
                 child: Text(
                   '1 BTC = ? USD',
@@ -42,9 +43,41 @@ class _PriceScreenState extends State<PriceScreen> {
           Container(
             height: 150.0,
             alignment: Alignment.center,
-            padding:const EdgeInsets.only(bottom: 30.0),
+            padding: const EdgeInsets.only(bottom: 30.0),
             color: Colors.lightBlue,
-            child: null,
+            child: DropdownButton<String>(
+              value: selectedCurrency,
+              items: const [
+                DropdownMenuItem(
+                  child: Text(
+                    'USD',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  value: 'USD',
+                ),
+                DropdownMenuItem(
+                  child: Text(
+                    'EUR',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  value: 'EUR',
+                ),
+                DropdownMenuItem(
+                  child: Text(
+                    'GBP',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  value: 'GBP',
+                ),
+              ],
+              onChanged: (value) {
+                setState(
+                  () {
+                    selectedCurrency = value!;
+                  },
+                );
+              },
+            ),
           ),
         ],
       ),
