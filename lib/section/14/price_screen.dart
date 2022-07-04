@@ -12,7 +12,7 @@ class PriceScreen extends StatefulWidget {
 class _PriceScreenState extends State<PriceScreen> {
   String selectedCurrency = 'USD';
 
-  List<DropdownMenuItem> getDropdownItems() {
+  DropdownButton androidDropdown() {
     List<DropdownMenuItem<dynamic>> dropdownItems = [];
     for (String currency in currenciesList) {
       var newItem = DropdownMenuItem(
@@ -21,7 +21,18 @@ class _PriceScreenState extends State<PriceScreen> {
       );
       dropdownItems.add(newItem);
     }
-    return dropdownItems;
+    return DropdownButton<dynamic>(
+      value: selectedCurrency,
+      dropdownColor: Colors.black,
+      items: dropdownItems,
+      onChanged: (value) {
+        setState(
+          () {
+            selectedCurrency = value!;
+          },
+        );
+      },
+    );
   }
 
   List<Text> getPickerItems() {
@@ -80,16 +91,3 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 }
-
-// DropdownButton<dynamic>(
-// value: selectedCurrency,
-// dropdownColor: Colors.black,
-// items: getDropdownItems(),
-// onChanged: (value) {
-// setState(
-// () {
-// selectedCurrency = value!;
-// },
-// );
-// },
-// ),
