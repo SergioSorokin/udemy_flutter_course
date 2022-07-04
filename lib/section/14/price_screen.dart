@@ -35,12 +35,18 @@ class _PriceScreenState extends State<PriceScreen> {
     );
   }
 
-  List<Text> getPickerItems() {
+  CupertinoPicker iOSPicker() {
     List<Text> pickerItems = [];
     for (String currency in currenciesList) {
       pickerItems.add(Text(currency));
     }
-    return pickerItems;
+    return CupertinoPicker(
+      itemExtent: 32,
+      onSelectedItemChanged: (selectedIndex) {
+        print(selectedIndex);
+      },
+      children: pickerItems,
+    );
   }
 
   @override
@@ -79,13 +85,7 @@ class _PriceScreenState extends State<PriceScreen> {
               alignment: Alignment.center,
               padding: const EdgeInsets.only(bottom: 30.0),
               color: Colors.lightBlue,
-              child: CupertinoPicker(
-                itemExtent: 32,
-                onSelectedItemChanged: (selectedIndex) {
-                  print(selectedIndex);
-                },
-                children: getPickerItems(),
-              )),
+              child: iOSPicker()),
         ],
       ),
     );
