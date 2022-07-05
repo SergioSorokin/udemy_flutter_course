@@ -4,6 +4,7 @@ import 'package:udemy_flutter_course/section/10/quizzler.dart';
 import 'package:udemy_flutter_course/section/11/destini.dart';
 import 'package:udemy_flutter_course/section/12/bmi_calculator.dart';
 import 'package:udemy_flutter_course/section/13/clima_home_page.dart';
+import 'package:udemy_flutter_course/section/14/bitcoin_ticker_home_page.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
@@ -41,6 +42,7 @@ class MyApp extends StatelessWidget {
         Destini.routName: (context) => const Destini(),
         BMICalculator.routName: (context) => const BMICalculator(),
         ClimaHomePage.routName: (context) => const ClimaHomePage(),
+        BitcoinTickerHomePage.routName: (context) => const BitcoinTickerHomePage(),
       },
       initialRoute: HomePage.routName,
     );
