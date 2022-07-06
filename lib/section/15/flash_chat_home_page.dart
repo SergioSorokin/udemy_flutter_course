@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/15/screens/welcome_screen.dart';
 
 class FlashChatHomePage extends StatelessWidget {
   static const String routName = '/FlashChat';
@@ -6,6 +7,6 @@ class FlashChatHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return const WelcomeScreen();
   }
 }
