@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 
-class WelcomeScreen extends StatefulWidget {
-  const WelcomeScreen({Key? key}) : super(key: key);
+class FlashChatWelcomeScreen extends StatefulWidget {
+  static const String routName = 'FlashChatWelcomeScreen';
+  const FlashChatWelcomeScreen({Key? key}) : super(key: key);
 
   @override
-  _WelcomeScreenState createState() => _WelcomeScreenState();
+  _FlashChatWelcomeScreenState createState() => _FlashChatWelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _FlashChatWelcomeScreenState extends State<FlashChatWelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

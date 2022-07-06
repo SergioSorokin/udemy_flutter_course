@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter_course/section/15/constants.dart';
+import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({Key? key}) : super(key: key);
+class FlashChatScreen extends StatefulWidget {
+  static const String routName = 'FlashChatScreen';
+  const FlashChatScreen({Key? key}) : super(key: key);
 
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  _FlashChatScreenState createState() => _FlashChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _FlashChatScreenState extends State<FlashChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

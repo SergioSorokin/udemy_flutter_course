@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+class FlashChatLoginScreen extends StatefulWidget {
+  static const String routName = 'FlashChatLoginScreen';
+  const FlashChatLoginScreen({Key? key}) : super(key: key);
 
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _FlashChatLoginScreenState createState() => _FlashChatLoginScreenState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _FlashChatLoginScreenState extends State<FlashChatLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Padding(
-        padding:const EdgeInsets.symmetric(horizontal: 24.0),
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -22,50 +23,54 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 200.0,
               child: Image.asset('images/flash-logo.png'),
             ),
-            const  SizedBox(
+            const SizedBox(
               height: 48.0,
             ),
             TextField(
               onChanged: (value) {
                 //Do something with the user input.
               },
-              decoration:const InputDecoration(
+              decoration: const InputDecoration(
                 hintText: 'Enter your email',
                 contentPadding:
-                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
             ),
-            const  SizedBox(
+            const SizedBox(
               height: 8.0,
             ),
             TextField(
               onChanged: (value) {
                 //Do something with the user input.
               },
-              decoration:const InputDecoration(
-                hintText: 'Enter your password',
+              decoration: const InputDecoration(
+                hintText: 'Enter your password.',
                 contentPadding:
-                EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
+                    EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 1.0),
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 1.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+                  borderSide:
+                      BorderSide(color: Colors.lightBlueAccent, width: 2.0),
                   borderRadius: BorderRadius.all(Radius.circular(32.0)),
                 ),
               ),
@@ -74,20 +79,19 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 24.0,
             ),
             Padding(
-              padding:const EdgeInsets.symmetric(vertical: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 16.0),
               child: Material(
-                color: Colors.blueAccent,
-                borderRadius:const BorderRadius.all(Radius.circular(30.0)),
+                color: Colors.lightBlueAccent,
+                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
                 elevation: 5.0,
                 child: MaterialButton(
                   onPressed: () {
-                    //Implement registration functionality.
+                    //Implement login functionality.
                   },
                   minWidth: 200.0,
                   height: 42.0,
-                  child:const Text(
-                    'Register',
-                    style: TextStyle(color: Colors.white),
+                  child: const Text(
+                    'Log In',
                   ),
                 ),
               ),
