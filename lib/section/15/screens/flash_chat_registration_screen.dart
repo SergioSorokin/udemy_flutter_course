@@ -21,9 +21,12 @@ class _FlashChatRegistrationScreenState
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            SizedBox(
-              height: 200.0,
-              child: Image.asset('images/flash-logo.png'),
+            Hero(
+              tag: 'flash-logo',
+              child: SizedBox(
+                height: 200.0,
+                child: Image.asset('images/flash-logo.png'),
+              ),
             ),
             const SizedBox(
               height: 48.0,
