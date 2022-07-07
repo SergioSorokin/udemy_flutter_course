@@ -23,9 +23,12 @@ class _FlashChatWelcomeScreenState extends State<FlashChatWelcomeScreen> {
           children: <Widget>[
             Row(
               children: <Widget>[
-                SizedBox(
-                  child: Image.asset('images/flash-logo.png'),
-                  height: 60.0,
+                Hero(
+                  tag: 'flash-logo',
+                  child: SizedBox(
+                    child: Image.asset('images/flash-logo.png'),
+                    height: 60.0,
+                  ),
                 ),
                 const Text(
                   'Flash Chat',
