@@ -34,6 +34,12 @@ class _FlashChatWelcomeScreenState extends State<FlashChatWelcomeScreen>
       print(animation.value);
     });
   }
+  @override
+  void dispose() {
+    super.dispose();
+
+    controller.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
