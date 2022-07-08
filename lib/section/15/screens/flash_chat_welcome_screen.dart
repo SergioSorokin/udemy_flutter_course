@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/15/screens/flash_chat_login_screen.dart';
 import 'package:udemy_flutter_course/section/15/screens/flash_chat_registration_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class FlashChatWelcomeScreen extends StatefulWidget {
   static const String routName = 'FlashChatWelcomeScreen';
@@ -34,6 +35,7 @@ class _FlashChatWelcomeScreenState extends State<FlashChatWelcomeScreen>
       print(animation.value);
     });
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -60,13 +62,18 @@ class _FlashChatWelcomeScreenState extends State<FlashChatWelcomeScreen>
                     height: 60.0,
                   ),
                 ),
-                const Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black,
-                  ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Flash Chat',
+                      textStyle: const TextStyle(
+                        fontSize: 45.0,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black,
+                      ),
+                      speed: const Duration(milliseconds: 200),
+                    ),
+                  ],
                 ),
               ],
             ),
