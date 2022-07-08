@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/15/components/rounded_button.dart';
 
 class FlashChatLoginScreen extends StatefulWidget {
   static const String routName = 'FlashChatLoginScreen';
@@ -81,23 +82,10 @@ class _FlashChatLoginScreenState extends State<FlashChatLoginScreen> {
             const SizedBox(
               height: 24.0,
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.lightBlueAccent,
-                borderRadius: const BorderRadius.all(Radius.circular(30.0)),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Implement login functionality.
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child: const Text(
-                    'Log In',
-                  ),
-                ),
-              ),
+            RoundedButton(
+              title: 'Log In',
+              color: Colors.lightBlueAccent,
+              onPressed: () {},
             ),
           ],
         ),
