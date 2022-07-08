@@ -13,24 +13,32 @@ class FlashChatWelcomeScreen extends StatefulWidget {
 class _FlashChatWelcomeScreenState extends State<FlashChatWelcomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
+  late Animation animation;
 
   @override
   void initState() {
     super.initState();
+
     controller = AnimationController(
       vsync: this,
-      duration: const Duration(seconds: 1),
+      duration: const Duration(seconds: 3),
     );
+
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+        .animate(controller);
+
     controller.forward();
+
     controller.addListener(() {
-      print(controller.value);
+      setState(() {});
+      print(animation.value);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
