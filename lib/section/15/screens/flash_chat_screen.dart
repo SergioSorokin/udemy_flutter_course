@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FlashChatScreen extends StatefulWidget {
   static const String routName = 'FlashChatScreen';
@@ -10,6 +11,26 @@ class FlashChatScreen extends StatefulWidget {
 }
 
 class _FlashChatScreenState extends State<FlashChatScreen> {
+  final _auth = FirebaseAuth.instance;
+  late final User loggedInUser;
+  @override
+  void initState() {
+    super.initState();
+    getCurrentUser();
+  }
+
+  void getCurrentUser() {
+    try {
+      final user = _auth.currentUser;
+      if (user != null) {
+        loggedInUser = user;
+        print(loggedInUser.email);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

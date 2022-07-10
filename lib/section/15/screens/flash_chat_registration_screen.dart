@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/15/components/rounded_button.dart';
 import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:udemy_flutter_course/section/15/screens/flash_chat_screen.dart';
 
 class FlashChatRegistrationScreen extends StatefulWidget {
   static const String routName = 'FlashChatRegistrationScreen';
@@ -13,6 +15,10 @@ class FlashChatRegistrationScreen extends StatefulWidget {
 
 class _FlashChatRegistrationScreenState
     extends State<FlashChatRegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +41,11 @@ class _FlashChatRegistrationScreenState
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
+              style: const TextStyle(color: Colors.black),
               decoration:
                   kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
             ),
@@ -45,8 +54,11 @@ class _FlashChatRegistrationScreenState
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
+              textAlign: TextAlign.center,
+              obscureText: true,
+              style: const TextStyle(color: Colors.black),
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password.'),
             ),
@@ -56,7 +68,15 @@ class _FlashChatRegistrationScreenState
             RoundedButton(
               title: 'Register',
               color: Colors.blueAccent,
-              onPressed: () {},
+              onPressed: () async {
+                try {
+                   _auth.createUserWithEmailAndPassword(
+                      email: email, password: password);
+                  Navigator.pushNamed(context, FlashChatScreen.routName);
+                } catch (e) {
+                  print(e);
+                }
+              },
             ),
           ],
         ),
