@@ -70,7 +70,7 @@ class _FlashChatRegistrationScreenState
               color: Colors.blueAccent,
               onPressed: () async {
                 try {
-                   _auth.createUserWithEmailAndPassword(
+                   await _auth.createUserWithEmailAndPassword(
                       email: email, password: password);
                   Navigator.pushNamed(context, FlashChatScreen.routName);
                 } catch (e) {
