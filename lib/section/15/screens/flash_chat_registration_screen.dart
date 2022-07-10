@@ -13,6 +13,9 @@ class FlashChatRegistrationScreen extends StatefulWidget {
 
 class _FlashChatRegistrationScreenState
     extends State<FlashChatRegistrationScreen> {
+  late String email;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,8 +38,11 @@ class _FlashChatRegistrationScreenState
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                email = value;
               },
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
+              style: const TextStyle(color: Colors.black),
               decoration:
                   kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
             ),
@@ -45,8 +51,11 @@ class _FlashChatRegistrationScreenState
             ),
             TextField(
               onChanged: (value) {
-                //Do something with the user input.
+                password = value;
               },
+              textAlign: TextAlign.center,
+              obscureText: true,
+              style: const TextStyle(color: Colors.black),
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password.'),
             ),
@@ -56,7 +65,10 @@ class _FlashChatRegistrationScreenState
             RoundedButton(
               title: 'Register',
               color: Colors.blueAccent,
-              onPressed: () {},
+              onPressed: () {
+                print(email);
+                print(password);
+              },
             ),
           ],
         ),

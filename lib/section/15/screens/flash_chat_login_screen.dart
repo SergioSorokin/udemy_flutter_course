@@ -35,6 +35,9 @@ class _FlashChatLoginScreenState extends State<FlashChatLoginScreen> {
               onChanged: (value) {
                 //Do something with the user input.
               },
+              textAlign: TextAlign.center,
+              keyboardType: TextInputType.emailAddress,
+              style: const TextStyle(color: Colors.black),
               decoration:
                   kTextFieldDecoration.copyWith(hintText: 'Enter your email'),
             ),
@@ -45,6 +48,9 @@ class _FlashChatLoginScreenState extends State<FlashChatLoginScreen> {
               onChanged: (value) {
                 //Do something with the user input.
               },
+              textAlign: TextAlign.center,
+              obscureText: true,
+              style: const TextStyle(color: Colors.black),
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password.'),
             ),
