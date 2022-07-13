@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+final _firestore = FirebaseFirestore.instance;
+
 class FlashChatScreen extends StatefulWidget {
   static const String routName = 'FlashChatScreen';
   const FlashChatScreen({Key? key}) : super(key: key);
@@ -12,7 +14,6 @@ class FlashChatScreen extends StatefulWidget {
 }
 
 class _FlashChatScreenState extends State<FlashChatScreen> {
-  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late final User loggedInUser;
   late String messageText;
@@ -56,31 +57,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            StreamBuilder<QuerySnapshot>(
-                stream: _firestore.collection('messages').snapshots(),
-                builder: (context, snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        backgroundColor: Colors.lightBlueAccent,
-                      ),
-                    );
-                  }
-                  final messages = snapshot.data?.docs;
-                  List<MessageBubble> messageBubbles = [];
-                  for (var message in messages!) {
-                    final messageText = message.get('text');
-                    final messageSender = message.get('sender');
-                    final messageBubble =
-                        MessageBubble(text: messageText, sender: messageSender);
-                    messageBubbles.add(messageBubble);
-                  }
-                  return Expanded(
-                    child: ListView(
-                      children: messageBubbles,
-                    ),
-                  );
-                }),
+            const MessagesStream(),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -114,6 +91,41 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
         ),
       ),
     );
+  }
+}
+
+class MessagesStream extends StatelessWidget {
+  const MessagesStream({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+        stream: _firestore.collection('messages').snapshots(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(
+                backgroundColor: Colors.lightBlueAccent,
+              ),
+            );
+          }
+          final messages = snapshot.data?.docs;
+          List<MessageBubble> messageBubbles = [];
+          for (var message in messages!) {
+            final messageText = message.get('text');
+            final messageSender = message.get('sender');
+            final messageBubble =
+                MessageBubble(text: messageText, sender: messageSender);
+            messageBubbles.add(messageBubble);
+          }
+          return Expanded(
+            child: ListView(
+              children: messageBubbles,
+            ),
+          );
+        });
   }
 }
 
