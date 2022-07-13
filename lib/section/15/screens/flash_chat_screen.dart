@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,8 +12,10 @@ class FlashChatScreen extends StatefulWidget {
 }
 
 class _FlashChatScreenState extends State<FlashChatScreen> {
+  final _firestore = FirebaseFirestore.instance;
   final _auth = FirebaseAuth.instance;
   late final User loggedInUser;
+  late String messageText;
   @override
   void initState() {
     super.initState();
@@ -59,15 +62,19 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      style: const TextStyle(color: Colors.white),
                       onChanged: (value) {
-                        //Do something with the user input.
+                        messageText = value;
                       },
                       decoration: kMessageTextFieldDecoration,
                     ),
                   ),
-                  ElevatedButton(
+                  TextButton(
                     onPressed: () {
-                      //Implement send functionality.
+                      _firestore.collection('messages').add({
+                        'text': messageText,
+                        'sender': loggedInUser.email,
+                      });
                     },
                     child: const Text(
                       'Send',
