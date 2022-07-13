@@ -14,6 +14,7 @@ class FlashChatScreen extends StatefulWidget {
 }
 
 class _FlashChatScreenState extends State<FlashChatScreen> {
+  final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
   late final User loggedInUser;
   late String messageText;
@@ -65,6 +66,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
+                      controller: messageTextController,
                       style: const TextStyle(color: Colors.black),
                       onChanged: (value) {
                         messageText = value;
@@ -74,6 +76,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
+                      messageTextController.clear();
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
