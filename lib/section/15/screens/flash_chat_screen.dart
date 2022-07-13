@@ -33,6 +33,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
       print(e);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,6 +50,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
         title: const Text('⚡️Chat'),
         backgroundColor: Colors.lightBlueAccent,
       ),
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -57,20 +59,26 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
             StreamBuilder<QuerySnapshot>(
                 stream: _firestore.collection('messages').snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData) {}
+                  if (!snapshot.hasData) {
+                    return const Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.lightBlueAccent,
+                      ),
+                    );
+                  }
                   final messages = snapshot.data?.docs;
-                  List<Text> messageWidgets = [];
+                  List<MessageBubble> messageBubbles = [];
                   for (var message in messages!) {
                     final messageText = message.get('text');
                     final messageSender = message.get('sender');
-                    final messageWidget = Text(
-                      '$messageText from $messageSender',
-                      style: const TextStyle(color: Colors.white),
-                    );
-                    messageWidgets.add(messageWidget);
+                    final messageBubble =
+                        MessageBubble(text: messageText, sender: messageSender);
+                    messageBubbles.add(messageBubble);
                   }
-                  return Column(
-                    children: messageWidgets,
+                  return Expanded(
+                    child: ListView(
+                      children: messageBubbles,
+                    ),
                   );
                 }),
             Container(
@@ -80,7 +88,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
                 children: <Widget>[
                   Expanded(
                     child: TextField(
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.black),
                       onChanged: (value) {
                         messageText = value;
                       },
@@ -104,6 +112,46 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MessageBubble extends StatelessWidget {
+  const MessageBubble({Key? key, required this.text, required this.sender})
+      : super(key: key);
+  final String text;
+  final String sender;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text(
+            sender,
+            style: const TextStyle(fontSize: 12, color: Colors.black54),
+          ),
+          Material(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.lightBlueAccent,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 20,
+              ),
+              child: Text(
+                text,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
