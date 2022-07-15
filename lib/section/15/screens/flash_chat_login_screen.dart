@@ -74,13 +74,20 @@ class _FlashChatLoginScreenState extends State<FlashChatLoginScreen> {
                   setState(() {
                     showSpinner = true;
                   });
+                  Future.delayed(const Duration(seconds: 3), () {
+                    setState(() {
+                      showSpinner = false;
+                    });
+                  });
                   try {
-                     await _auth.signInWithEmailAndPassword(
+                    await _auth.signInWithEmailAndPassword(
                         email: email, password: password);
                     Navigator.pushNamed(context, FlashChatScreen.routName);
-                     setState(() {
-                       showSpinner = false;
-                     });
+                    email = '';
+                    password = '';
+                    setState(() {
+                      showSpinner = false;
+                    });
                   } catch (e) {
                     print(e);
                   }
