@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/home_page.dart';
 import 'package:udemy_flutter_course/section/10/quizzler.dart';
@@ -5,12 +6,18 @@ import 'package:udemy_flutter_course/section/11/destini.dart';
 import 'package:udemy_flutter_course/section/12/bmi_calculator.dart';
 import 'package:udemy_flutter_course/section/13/clima_home_page.dart';
 import 'package:udemy_flutter_course/section/14/bitcoin_ticker_home_page.dart';
+import 'package:udemy_flutter_course/section/15/screens/flash_chat_login_screen.dart';
+import 'package:udemy_flutter_course/section/15/screens/flash_chat_registration_screen.dart';
+import 'package:udemy_flutter_course/section/15/screens/flash_chat_screen.dart';
+import 'package:udemy_flutter_course/section/15/screens/flash_chat_welcome_screen.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
 import 'package:udemy_flutter_course/section/9/xylophone.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -43,6 +50,10 @@ class MyApp extends StatelessWidget {
         BMICalculator.routName: (context) => const BMICalculator(),
         ClimaHomePage.routName: (context) => const ClimaHomePage(),
         BitcoinTickerHomePage.routName: (context) => const BitcoinTickerHomePage(),
+        FlashChatWelcomeScreen.routName: (context) => const FlashChatWelcomeScreen(),
+        FlashChatLoginScreen.routName: (context) => const FlashChatLoginScreen(),
+        FlashChatRegistrationScreen.routName: (context) => const FlashChatRegistrationScreen(),
+        FlashChatScreen.routName: (context) => const FlashChatScreen(),
       },
       initialRoute: HomePage.routName,
     );
