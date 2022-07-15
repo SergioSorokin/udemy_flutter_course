@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 
 final _firestore = FirebaseFirestore.instance;
-late final User loggedInUser;
 
 class FlashChatScreen extends StatefulWidget {
   static const String routName = 'FlashChatScreen';
@@ -18,8 +17,8 @@ class FlashChatScreen extends StatefulWidget {
 class _FlashChatScreenState extends State<FlashChatScreen> {
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
-
-  late String messageText;
+  late final User loggedInUser;
+  String messageText = '';
 
   @override
   void initState() {
@@ -32,7 +31,6 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
       final user = _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
-        print(loggedInUser.email);
       }
     } catch (e) {
       print(e);
@@ -47,8 +45,8 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.close),
-              onPressed: () {
-                _auth.signOut();
+              onPressed: () async {
+                await _auth.signOut();
                 Navigator.pop(context);
               }),
         ],
@@ -61,7 +59,9 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            const MessagesStream(),
+            MessagesStream(
+              loggedInUser: loggedInUser,
+            ),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -79,12 +79,15 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
                   ),
                   TextButton(
                     onPressed: () {
-                      messageTextController.clear();
-                      _firestore.collection('messages').add({
-                        'text': messageText,
-                        'sender': loggedInUser.email,
-                        'time': DateTime.now(),
-                      });
+                      if (messageText != '') {
+                        messageTextController.clear();
+                        _firestore.collection('messages').add({
+                          'text': messageText,
+                          'sender': loggedInUser.email,
+                          'time': DateTime.now(),
+                        });
+                        messageText = '';
+                      }
                     },
                     child: const Text(
                       'Send',
@@ -104,7 +107,9 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
 class MessagesStream extends StatelessWidget {
   const MessagesStream({
     Key? key,
+    required this.loggedInUser,
   }) : super(key: key);
+  final User loggedInUser;
 
   @override
   Widget build(BuildContext context) {
