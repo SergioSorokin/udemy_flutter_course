@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 
 final _firestore = FirebaseFirestore.instance;
 late final User loggedInUser;
@@ -82,6 +83,7 @@ class _FlashChatScreenState extends State<FlashChatScreen> {
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
+                        'time': DateTime.now(),
                       });
                     },
                     child: const Text(
@@ -107,7 +109,7 @@ class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-        stream: _firestore.collection('messages').snapshots(),
+        stream: _firestore.collection('messages').orderBy('time').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
@@ -121,12 +123,13 @@ class MessagesStream extends StatelessWidget {
           for (var message in messages!) {
             final messageText = message.get('text');
             final messageSender = message.get('sender');
-
+            final dateTime = message.get('time').toDate();
             final currentUser = loggedInUser.email;
 
             final messageBubble = MessageBubble(
               text: messageText,
               sender: messageSender,
+              dateTime: dateTime,
               isMe: currentUser == messageSender,
             );
             messageBubbles.add(messageBubble);
@@ -143,10 +146,15 @@ class MessagesStream extends StatelessWidget {
 
 class MessageBubble extends StatelessWidget {
   const MessageBubble(
-      {Key? key, required this.text, required this.sender, required this.isMe})
+      {Key? key,
+      required this.text,
+      required this.sender,
+      required this.isMe,
+      required this.dateTime})
       : super(key: key);
   final String text;
   final String sender;
+  final DateTime dateTime;
   final bool isMe;
 
   @override
@@ -157,6 +165,12 @@ class MessageBubble extends StatelessWidget {
         crossAxisAlignment:
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
+          Center(
+            child: Text(
+              DateFormat().addPattern('MM/dd/yy ').add_jms().format(dateTime),
+              style: const TextStyle(fontSize: 12, color: Colors.black54),
+            ),
+          ),
           Text(
             sender,
             style: const TextStyle(fontSize: 12, color: Colors.black54),
