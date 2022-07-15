@@ -4,6 +4,7 @@ import 'package:udemy_flutter_course/section/15/flash_chat_constants.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 final _firestore = FirebaseFirestore.instance;
+late final User loggedInUser;
 
 class FlashChatScreen extends StatefulWidget {
   static const String routName = 'FlashChatScreen';
@@ -16,8 +17,9 @@ class FlashChatScreen extends StatefulWidget {
 class _FlashChatScreenState extends State<FlashChatScreen> {
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
-  late final User loggedInUser;
+
   late String messageText;
+
   @override
   void initState() {
     super.initState();
@@ -114,17 +116,24 @@ class MessagesStream extends StatelessWidget {
               ),
             );
           }
-          final messages = snapshot.data?.docs;
+          final messages = snapshot.data?.docs.reversed;
           List<MessageBubble> messageBubbles = [];
           for (var message in messages!) {
             final messageText = message.get('text');
             final messageSender = message.get('sender');
-            final messageBubble =
-                MessageBubble(text: messageText, sender: messageSender);
+
+            final currentUser = loggedInUser.email;
+
+            final messageBubble = MessageBubble(
+              text: messageText,
+              sender: messageSender,
+              isMe: currentUser == messageSender,
+            );
             messageBubbles.add(messageBubble);
           }
           return Expanded(
             child: ListView(
+              reverse: true,
               children: messageBubbles,
             ),
           );
@@ -133,25 +142,37 @@ class MessagesStream extends StatelessWidget {
 }
 
 class MessageBubble extends StatelessWidget {
-  const MessageBubble({Key? key, required this.text, required this.sender})
+  const MessageBubble(
+      {Key? key, required this.text, required this.sender, required this.isMe})
       : super(key: key);
   final String text;
   final String sender;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment:
+            isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
             sender,
             style: const TextStyle(fontSize: 12, color: Colors.black54),
           ),
           Material(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.lightBlueAccent,
+            elevation: 5.0,
+            borderRadius: isMe
+                ? const BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30))
+                : const BorderRadius.only(
+                    topRight: Radius.circular(30),
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+            color: isMe ? Colors.lightBlueAccent : Colors.white,
             child: Padding(
               padding: const EdgeInsets.symmetric(
                 vertical: 10,
@@ -159,8 +180,8 @@ class MessageBubble extends StatelessWidget {
               ),
               child: Text(
                 text,
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: isMe ? Colors.white : Colors.black54,
                   fontSize: 15,
                 ),
               ),
