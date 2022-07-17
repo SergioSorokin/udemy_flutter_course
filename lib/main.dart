@@ -10,6 +10,7 @@ import 'package:udemy_flutter_course/section/15/screens/flash_chat_login_screen.
 import 'package:udemy_flutter_course/section/15/screens/flash_chat_registration_screen.dart';
 import 'package:udemy_flutter_course/section/15/screens/flash_chat_screen.dart';
 import 'package:udemy_flutter_course/section/15/screens/flash_chat_welcome_screen.dart';
+import 'package:udemy_flutter_course/section/16/screens/tasks_screen.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
@@ -54,6 +55,7 @@ class MyApp extends StatelessWidget {
         FlashChatLoginScreen.routName: (context) => const FlashChatLoginScreen(),
         FlashChatRegistrationScreen.routName: (context) => const FlashChatRegistrationScreen(),
         FlashChatScreen.routName: (context) => const FlashChatScreen(),
+        TasksScreen.routName: (context) => const TasksScreen(),
       },
       initialRoute: HomePage.routName,
     );

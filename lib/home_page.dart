@@ -6,6 +6,7 @@ import 'package:udemy_flutter_course/section/12/bmi_calculator.dart';
 import 'package:udemy_flutter_course/section/13/clima_home_page.dart';
 import 'package:udemy_flutter_course/section/14/bitcoin_ticker_home_page.dart';
 import 'package:udemy_flutter_course/section/15/screens/flash_chat_welcome_screen.dart';
+import 'package:udemy_flutter_course/section/16/screens/tasks_screen.dart';
 import 'package:udemy_flutter_course/section/6/user_card.dart';
 import 'package:udemy_flutter_course/section/7/dice_page.dart';
 import 'package:udemy_flutter_course/section/8/magic_ball.dart';
@@ -68,6 +69,10 @@ class HomePage {
           CustomNavigationButton(
             routName: FlashChatWelcomeScreen.routName,
             assetImage: 'images/flash-chat.png',
+          ),
+          CustomNavigationButton(
+            routName: TasksScreen.routName,
+            assetImage: 'images/to_do_logo.png',
           ),
         ],
       ),
