@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:udemy_flutter_course/section/16/screens/add_task_screen.dart';
 import 'package:udemy_flutter_course/section/16/widgets/tasks_list.dart';
 
 class TasksScreen extends StatelessWidget {
@@ -9,61 +10,67 @@ class TasksScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        backgroundColor: Colors.lightBlueAccent,
+        floatingActionButton: FloatingActionButton(
           backgroundColor: Colors.lightBlueAccent,
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: Colors.lightBlueAccent,
-            child: const Icon(Icons.add),
-            onPressed: () {},
-          ),
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.only(
-                    top: 60, left: 30, right: 30, bottom: 30),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    CircleAvatar(
-                      child: Icon(
-                        Icons.list,
-                        color: Colors.lightBlueAccent,
-                        size: 30,
-                      ),
-                      backgroundColor: Colors.white,
-                      radius: 30,
+          child: const Icon(Icons.add),
+          onPressed: () {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => const AddTaskScreen(),
+            );
+          },
+        ),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(
+                  top: 60, left: 30, right: 30, bottom: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const [
+                  CircleAvatar(
+                    child: Icon(
+                      Icons.list,
+                      color: Colors.lightBlueAccent,
+                      size: 30,
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                      'Todoey',
-                      style: TextStyle(
-                          fontSize: 50,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Text(
-                      '12 Tasks',
-                      style: TextStyle(fontSize: 18, color: Colors.white),
-                    ),
-                  ],
-                ),
+                    backgroundColor: Colors.white,
+                    radius: 30,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Todoey',
+                    style: TextStyle(
+                        fontSize: 50,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    '12 Tasks',
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                ],
               ),
-              Expanded(
-                child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
+            ),
+            Expanded(
+              child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20),
                     ),
-                    child: const TaskList()),
-              )
-            ],
-          )),
+                  ),
+                  child: const TaskList()),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
