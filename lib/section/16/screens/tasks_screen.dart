@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:udemy_flutter_course/section/16/models/task.dart';
+import 'package:provider/provider.dart';
+import 'package:udemy_flutter_course/section/16/models/task_data.dart';
 import 'package:udemy_flutter_course/section/16/screens/add_task_screen.dart';
 import 'package:udemy_flutter_course/section/16/widgets/tasks_list.dart';
 
-class TasksScreen extends StatefulWidget {
+class TasksScreen extends StatelessWidget {
   static const String routName = 'TasksScreen';
   const TasksScreen({Key? key}) : super(key: key);
-
-  @override
-  State<TasksScreen> createState() => _TasksScreenState();
-}
-
-class _TasksScreenState extends State<TasksScreen> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-    Task(name: 'Buy butter'),
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -37,9 +26,9 @@ class _TasksScreenState extends State<TasksScreen> {
                       bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: AddTaskScreen(
                     addTaskCallback: (newTaskTitle) {
-                      setState(() {
-                        tasks.add(Task(name: newTaskTitle));
-                      });
+                      // setState(() {
+                      //   tasks.add(Task(name: newTaskTitle));
+                      // });
                       Navigator.pop(context);
                     },
                   ),
@@ -77,7 +66,7 @@ class _TasksScreenState extends State<TasksScreen> {
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    '${tasks.length} Tasks',
+                    '${Provider.of<TaskData>(context).tasksCounter()} Tasks',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -93,7 +82,7 @@ class _TasksScreenState extends State<TasksScreen> {
                     topRight: Radius.circular(20),
                   ),
                 ),
-                child: TaskList(tasks: tasks),
+                child: const TaskList(),
               ),
             ),
           ],
