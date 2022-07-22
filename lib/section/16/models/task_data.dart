@@ -1,14 +1,25 @@
+import 'dart:collection';
 import 'package:flutter/foundation.dart';
 import 'package:udemy_flutter_course/section/16/models/task.dart';
 
 class TaskData extends ChangeNotifier {
-  List<Task> tasks = [
+  final List<Task> _tasks = [
     Task(name: 'Buy milk'),
     Task(name: 'Buy eggs'),
     Task(name: 'Buy bread'),
     Task(name: 'Buy butter'),
   ];
   int tasksCounter() {
-    return tasks.length;
+    return _tasks.length;
+  }
+
+  UnmodifiableListView<Task> get tasks {
+    return UnmodifiableListView(_tasks);
+  }
+
+  void addTask(String? newTextTitle) {
+    final task = Task(name: newTextTitle!);
+    _tasks.add(task);
+    notifyListeners();
   }
 }
